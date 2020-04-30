@@ -15,6 +15,8 @@ void Mover(tareas *tPendiente, tareas *tRealizda, int cant);
 //_________________________PUNTO 4________________________________
 void MostrarTareas(tareas *_tarea, int cant);
 
+void BusquedaPorPalabra(tareas *buscar, int cant);
+
 int main(){
     int cant = 0;
     printf("Ingrese la cantidad de tareas a realizar: ");
@@ -36,6 +38,8 @@ int main(){
     //____________Muestro todas las tareas PENDIENTES_________________
     printf("\n\n\nTODAS LAS TAREAS PENDIENTES\n");
     MostrarTareas(TareasPendientes, cant);
+
+    BusquedaPorPalabra(TareasRealizadas, cant);//punto 7
     getchar();
     return 0;
 }
@@ -93,4 +97,30 @@ void MostrarTareas(tareas *_tarea, int cant){
          printf("Tiempo de duracion: %d nimutos", _tarea[i].Duracion);
     }
    
+}
+
+void BusquedaPorPalabra(tareas *buscar, int cant)
+{
+    fflush(stdin);
+    char busqueda[100];
+    printf("\n\n Escriba la tarea que quiera buscar: ");
+    gets(busqueda);
+    int bus = 0;
+    for (int i = 0; i < cant; ++i)
+    {
+        if (strcmp(buscar[i].Descripcion, busqueda) == 0)
+        {
+            printf("\n\nLO ENCONTRAMOS");
+            printf("\nID: %d", buscar[i].TareaID);
+            printf("\nTarea: ");
+            puts(buscar[i].Descripcion);
+            printf("Duracion: %d", buscar[i].Duracion);
+            bus = 1;
+        }
+    }
+
+    if (bus == 0)
+    {
+        printf("\nNO HAY RESULTADOS");
+    }
 }
