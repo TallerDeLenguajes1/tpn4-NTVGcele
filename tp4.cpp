@@ -10,10 +10,10 @@ typedef struct Tarea {
 }tareas;
 
 void CargarTareas(tareas *_tarea, int cant);
-//--------------PUNTO "3"_--------------------------
-void Mover(tareas *tPendiente, tareas *tRealizda, int cant);
-//_________________________PUNTO 4________________________________
-void MostrarTareas(tareas *_tarea, int cant);
+void Mover(tareas *tPendiente, tareas *tRealizda, int cant);//PUNTO 3
+void MostrarTareas(tareas *_tarea, int cant);//PUNTO 4
+void BusquedaPorId(tareas *_tarea, int cant);
+
 
 void BusquedaPorPalabra(tareas *buscar, int cant);
 
@@ -39,7 +39,11 @@ int main(){
     printf("\n\n\nTODAS LAS TAREAS PENDIENTES\n");
     MostrarTareas(TareasPendientes, cant);
 
+
     BusquedaPorPalabra(TareasRealizadas, cant);//punto 7
+
+    BusquedaPorId(TareasRealizadas, cant);
+
     getchar();
     return 0;
 }
@@ -99,6 +103,7 @@ void MostrarTareas(tareas *_tarea, int cant){
    
 }
 
+
 void BusquedaPorPalabra(tareas *buscar, int cant)
 {
     fflush(stdin);
@@ -124,3 +129,29 @@ void BusquedaPorPalabra(tareas *buscar, int cant)
         printf("\nNO HAY RESULTADOS");
     }
 }
+
+//_________________________PUNTO 5________________________________
+void BusquedaPorId(tareas *_tarea, int cant){
+    int buscado = 0;
+    printf("\nIngrese el id de la tarea buscada: ");
+    scanf("%d", &buscado);
+    int bus=0;
+    for (int i = 0; i < cant; ++i)
+    {
+        if (_tarea[i].TareaID == buscado)
+        {
+            bus=1;
+            printf("\n\nLO ENCONTRAMOS!");
+            printf("ID: %d\n", _tarea[i].TareaID);
+            printf("\nTipo de tarea: ");
+            puts(_tarea[i].Descripcion);
+            printf("\nTiempo de duracion: %d", _tarea[i].Duracion);
+        }
+
+    }
+    if (bus == 0)
+    {
+       printf("\nNO ENCONTRAMOS\n");
+    }
+}
+
